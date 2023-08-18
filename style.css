@@ -1,7 +1,6 @@
 body, header, table, .footer p {
   color: #adbac7;
   background-color: #22272e;
-  max-width: 1080px;
   margin: auto;  /* centers the content horizontally */
 }
 
