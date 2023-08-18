@@ -1,0 +1,74 @@
+body, header, table, .footer p {
+  color: #adbac7;
+  background-color: #22272e;
+  max-width: 1080px;
+  margin: auto;  /* centers the content horizontally */
+}
+
+h2, th, td, select, #sum-label, #balance-input, #hm24 #user-form input {
+  color: #adbac7;
+  border-color: #373e47;
+}
+
+table, .btn-primary {
+  width: 100%;
+}
+
+#hm24 {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  background-color: #373e47;
+  margin-bottom: 2rem;  /* provides space between the main content and the footer */
+}
+
+#hm24 button, #hm24 #user-form input {
+  color: #adbac7;
+  background-color: #373e47;
+  border: 1px solid #444c56;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#hm24 button:hover {
+  background-color: #58a6ff;
+  color: #22272e;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  background-color: #22272e;
+  color: #8b949e;
+  text-align: center;  /* centers the footer content */
+}
+
+table, th, td {
+  background-color: #ffffff;  /* White background */
+  color: #000000;             /* Black text */
+  border-color: #c0c0c0;     /* Lighter border for a softer look on white */
+}
+
+/* You can also refine the hover effect of the links/buttons within the table for better visibility */
+a:hover, .btn:hover {
+  color: #1f6feb;
+  border-color: #1f6feb;
+  background-color: #e0e0e0;  /* Light gray background on hover */
+}
+
+
+table input[type="text"] {
+  border: none;
+  background-color: #ffffff;  /* Same as table's background color */
+  color: #000000;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+table input[type="text"]:focus {
+  border: 1px solid #58a6ff;  /* Add a border when the input is focused for better UX */
+}

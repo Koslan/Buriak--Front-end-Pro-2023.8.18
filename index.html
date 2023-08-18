@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Журнал студентів</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="d-flex justify-content-between p-3 bg-dark border-bottom border-primary mb-5">
+        <h2 class="mb-0"> Домашнє завдання 29</h2>
+        <div>
+            <a id="github-link" href="" target="_blank" class="btn btn-outline-light btn-sm">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <select id="task-select" class="custom-select custom-select-sm w-auto ml-3">
+                <option value="hm29" selected>hm29</option>
+            </select>
+        </div>
+    </header>
+    <div id="tab-content">
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Left Side: Student Management -->
+                <div class="col-md-6">
+                    <h2>Створити Студента</h2>
+                    <form id="student-form">
+                        <div class="form-group">
+                            <label for="name">Ім'я:</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Прізвище:</label>
+                            <input type="text" class="form-control" id="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthYear">Рік народження:</label>
+                            <input type="number" class="form-control" value='1993' id="birthYear" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-4">Створити</button>
+                    </form>
+
+                    <h2>Керування Студентами</h2>
+                    <label for="studentsList">Оберіть студента:</label>
+                    <select id="studentsList" class="form-control mb-3"></select>
+
+                    <button class="btn btn-success" onclick="markPresent()">Відзначити присутнім</button>
+                    <button class="btn btn-danger" onclick="markAbsent()">Відзначити відсутнім</button>
+
+                    <div class="form-group mt-3">
+                        <label for="mark">Додати Оцінку:</label>
+                        <input type="number" class="form-control" id="mark" min="1" max="100">
+
+                    </div>
+                    <button class="btn btn-primary" onclick="addMarkToStudent()">Додати Оцінку</button>
+
+                    <button class="btn btn-info mt-3" onclick="getSummary()">Отримати Підсумок Студента</button>
+                    <p class="mt-3" id="summary"></p>
+                </div>
+
+                <!-- Right Side: Student List -->
+
+                <div class="col-md-6">
+                    <h2>Список Студентів</h2>
+                    <button id="clearStorage">Очистити Локальне Сховище</button>
+                    <br>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ім'я</th>
+                                <th>Прізвище</th>
+                                <th>Рік народження</th>
+                                <th>Середня Оцінка</th> <!-- Додано цей стовпець -->
+                            </tr>
+                        </thead>
+                        <tbody id="student-table-body">
+                            <!-- Студенти будуть динамічно заповнюватися тут -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light text-center text-lg-start mt-5">
+        <div class="container p-4">
+            <h5 class="text">Костянтин Буряк</h5>
+            <p>Розробник Salesforce</p>
+            <p>+380934739023 | buriak.kostiantyn@gmail.com</p>
+            <a href="https://t.me/kostia_b" target="_blank"><i class="fab fa-telegram fa-2x"></i></a>
+            <a href="https://www.linkedin.com/in/kburiak/" target="_blank"><i
+                    class="fab fa-linkedin fa-2x ml-3"></i></a>
+        </div>
+    </footer>
+
+    <!-- Додайте Bootstrap JS та залежності -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Додайте ваш файл JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
