@@ -18,12 +18,12 @@ class Student {
     }
 
     present() {
-        const index = this.attendance.indexOf(undefined);
+        const index = this.attendance.indexOf(null);
         if (index !== -1) this.attendance[index] = true;
     }
 
     absent() {
-        const index = this.attendance.indexOf(undefined);
+        const index = this.attendance.indexOf(null);
         if (index !== -1) this.attendance[index] = false;
     }
 
@@ -41,10 +41,24 @@ class Student {
         const averageMark = this.getAverageMark();
         const attendanceCount = this.attendance.filter(val => val === true).length;
         const averageAttendance = attendanceCount / this.attendance.length;
+    
+        console.log('Average Mark:', averageMark);
+        console.log('Attendance Count:', attendanceCount);
+        console.log('Average Attendance:', averageAttendance);
+    
+        if (averageMark > 90 && averageAttendance > 0.9) {
+            console.log("Summary: Молодець!");
+            return "Молодець!";
+        }
 
-        if (averageMark > 90 && averageAttendance > 0.9) return "Молодець!";
-        if (averageMark <= 90 || averageAttendance <= 0.9) return "Добре, але можна краще";
-        return "Редиска!";
+
+        if (averageMark <= 90 && averageAttendance <= 0.9) {
+            console.log("Summary: Редиска!");
+            return "Редиска";
+        }
+        
+        console.log("Summary: Добре, але можна краще!");
+        return "Добре, але можна краще!";
     }
 }
 
@@ -83,6 +97,8 @@ function updateStudentTable() {
             <td>${student.surname}</td>
             <td>${student.yearOfBirth}</td>
             <td>${student.marks.length ? student.getAverageMark().toFixed(2) : 'No Marks'}</td>
+            <td>${student.attendance.filter(val => val === true).length}</td>
+            <td>${student.attendance.filter(val => val === false).length}</td>
         </tr>
     `).join('');
 }
@@ -112,7 +128,7 @@ document.getElementById('student-form').addEventListener('submit', function(e) {
 
     saveToLocalStorage();
     updateStudentsList();
-   updateStudentTable();
+    updateStudentTable();
     e.target.reset();
 });
 
@@ -121,12 +137,8 @@ window.onload = function () {
     updateStudentsList();
     updateStudentTable();
 
-    const currentPageUrl = window.location.href;
-  const username = currentPageUrl.split("/")[2].split(".")[0];
-  const repoName = currentPageUrl.split("/")[3];
-  const githubRepoUrl = `https://github.com/${username}/${repoName}`;
-
-  document.getElementById("github-link").href = githubRepoUrl;
+    const [,, username, repoName] = window.location.pathname.split("/");
+    document.getElementById("github-link").href = `https://github.com/${username}/${repoName}`;
 
     document.querySelectorAll('table td').forEach(cell => {
         cell.addEventListener('click', makeCellEditable);
@@ -155,12 +167,14 @@ function markPresent() {
     const student = getSelectedStudent();
     student.present();
     saveToLocalStorage();
+    updateStudentTable();
 }
 
 function markAbsent() {
     const student = getSelectedStudent();
     student.absent();
     saveToLocalStorage();
+    updateStudentTable();
 }
 
 function getSummary() {
