@@ -121,8 +121,12 @@ window.onload = function () {
     updateStudentsList();
     updateStudentTable();
 
-    const [,, username, repoName] = window.location.pathname.split("/");
-    document.getElementById("github-link").href = `https://github.com/${username}/${repoName}`;
+    const currentPageUrl = window.location.href;
+  const username = currentPageUrl.split("/")[2].split(".")[0];
+  const repoName = currentPageUrl.split("/")[3];
+  const githubRepoUrl = `https://github.com/${username}/${repoName}`;
+
+  document.getElementById("github-link").href = githubRepoUrl;
 
     document.querySelectorAll('table td').forEach(cell => {
         cell.addEventListener('click', makeCellEditable);
