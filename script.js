@@ -41,11 +41,11 @@ class Student {
         const averageMark = this.getAverageMark();
         const attendanceCount = this.attendance.filter(val => val === true).length;
         const averageAttendance = attendanceCount / this.attendance.length;
-    
+
         console.log('Average Mark:', averageMark);
         console.log('Attendance Count:', attendanceCount);
         console.log('Average Attendance:', averageAttendance);
-    
+
         if (averageMark > 90 && averageAttendance > 0.9) {
             console.log("Summary: Молодець!");
             return "Молодець!";
@@ -56,7 +56,7 @@ class Student {
             console.log("Summary: Редиска!");
             return "Редиска";
         }
-        
+
         console.log("Summary: Добре, але можна краще!");
         return "Добре, але можна краще!";
     }
@@ -77,7 +77,7 @@ function getSelectedStudent() {
 function addMarkToStudent() {
     const student = getSelectedStudent();
     const mark = parseInt(document.getElementById('mark').value);
-    
+
     // Ensuring mark is between 1 and 100
     if (mark && mark >= 1 && mark <= 100) {
         student.addMark(mark);
@@ -117,12 +117,12 @@ function loadFromLocalStorage() {
     }
 }
 
-document.getElementById('student-form').addEventListener('submit', function(e) {
+document.getElementById('student-form').addEventListener('submit', function (e) {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const surname = document.getElementById('surname').value;
     const birthYear = parseInt(document.getElementById('birthYear').value);
-    
+
     const student = new Student(name, surname, birthYear);
     students.push(student);
 
@@ -137,14 +137,17 @@ window.onload = function () {
     updateStudentsList();
     updateStudentTable();
 
-    const [,, username, repoName] = window.location.pathname.split("/");
-    document.getElementById("github-link").href = `https://github.com/${username}/${repoName}`;
+    const currentPageUrl = window.location.href;
+    const username = currentPageUrl.split("/")[2].split(".")[0];
+    const repoName = currentPageUrl.split("/")[3];
+    const githubRepoUrl = `https://github.com/${username}/${repoName}`;
 
+    document.getElementById("github-link").href = githubRepoUrl;
     document.querySelectorAll('table td').forEach(cell => {
         cell.addEventListener('click', makeCellEditable);
     });
 
-    document.getElementById('clearStorage').addEventListener('click', function() {
+    document.getElementById('clearStorage').addEventListener('click', function () {
         localStorage.clear();
         alert('Local storage cleared!');
         location.reload();
@@ -156,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cell.addEventListener('click', makeCellEditable);
     });
 
-    document.getElementById('clearStorage').addEventListener('click', function() {
+    document.getElementById('clearStorage').addEventListener('click', function () {
         localStorage.clear();
         alert('Local storage cleared!');
         location.reload();
@@ -187,7 +190,7 @@ function makeCellEditable(e) {
     let cell = e.target;
 
     // Check if the cell is already being edited
-    if(cell.querySelector('input')) return;
+    if (cell.querySelector('input')) return;
 
     let originalValue = cell.textContent;
     cell.innerHTML = `<input type="text" value="${originalValue}">`;
@@ -196,12 +199,12 @@ function makeCellEditable(e) {
     input.focus();
 
     // Save the updated value when the input field loses focus
-    input.addEventListener('blur', function() {
+    input.addEventListener('blur', function () {
         saveUpdatedValue(cell);
     });
 
     // Also save the updated value when the user hits Enter
-    input.addEventListener('keyup', function(event) {
+    input.addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
             saveUpdatedValue(cell);
         }
